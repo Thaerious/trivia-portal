@@ -1,0 +1,44 @@
+.gg-arrow-left {
+    box-sizing: border-box;
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    color: red;
+    left: 8px;
+    top: 6px;
+    width: 25px;
+    height: 25px;
+    z-index: 1;
+}
+
+.gg-arrow-left:hover{
+    color: rgb(255, 89, 0);
+    cursor: pointer;
+}
+
+.gg-arrow-left::after,
+.gg-arrow-left::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+}
+.gg-arrow-left::after {
+    width: 16px;
+    height: 16px;
+    border-bottom: 4px solid;
+    border-left: 4px solid;
+    transform: rotate(45deg);
+    bottom: 5px;
+    left: 3px;
+}
+.gg-arrow-left::before {
+    width: 20px;
+    height: 6px;
+    bottom: 10px;
+    left: 5px;
+    background: currentColor;
+}
+
+/* [1] https://css.gg/arrow-left */
