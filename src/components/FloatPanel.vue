@@ -57,7 +57,7 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-@import '../assets/styles/gg-arrow-left.css';
+@import '@/assets/styles/gg-arrow-left.css';
 
 .popup-background {
     position: fixed;

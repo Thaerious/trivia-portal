@@ -1,6 +1,6 @@
 <script>
-import extractData from '../utils/extractData.js';
-import CONST from '../utils/constants.js';
+import extractData from '@/utils/extractData.js';
+import login from "@/utils/api/login.js";
 import { AtomSpinner } from 'epic-spinners'
 
 export default {
@@ -13,21 +13,14 @@ export default {
         doLogin: async function () {
             try {
                 this.hideSpinner = false;
-                const result = await fetch(CONST.API.LOGIN, {
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    method: "POST",
-                    body: JSON.stringify(extractData(this.$el))
-                });
-                console.log("HERE");
-                const json = await result.json();
-                console.log(json);
+                const result = await login(extractData(this.$el));
+                const json = result.json();
+                
                 if (json.message) {
                     this.$emit("message", { message: json.message });
                 }
                 else if (result.status === 200) {
-                    this.$emit("message", { message: "todo forward to app page" });
+                    this.$emit("success");
                 }
             } catch (exception) {
                 this.$emit("message", { message: exception });
@@ -61,6 +54,6 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-@import '../assets/styles/pane.scss';
-@import '../assets/styles/spinner.scss';
+@import '@/assets/styles/pane.scss';
+@import '@/assets/styles/spinner.scss';
 </style>

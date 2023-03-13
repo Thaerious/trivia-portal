@@ -1,6 +1,6 @@
 <script>
-import extractData from '../utils/extractData.js';
-import CONST from '../utils/constants.js';
+import extractData from '@/utils/extractData.js';
+import CONST from '@/utils/constants.js';
 import { AtomSpinner } from 'epic-spinners'
 
 const CONFIRMATION_MESSAGE = "Your account has been registered and a confirmation email has been sent."
@@ -72,6 +72,6 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-@import '../assets/styles/pane.scss';
-@import '../assets/styles/spinner.scss';
+@import '@/assets/styles/pane.scss';
+@import '@/assets/styles/spinner.scss';
 </style>

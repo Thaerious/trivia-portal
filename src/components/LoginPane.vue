@@ -1,15 +1,10 @@
-<script setup>
-const callback = (response) => {
-    console.log("Handle the response", response)
-    console.log(response.access_token);
-}
-</script>
-
 <script>
-import GoogleLogo from '../assets/google.png';
+import GoogleLogo from '@/assets/google.png';
+import status from '@/utils/api/status.js';
 
 export default {
-    methods: {},
+    methods: {        
+    },
     data() {
         return {
             GoogleLogo: GoogleLogo

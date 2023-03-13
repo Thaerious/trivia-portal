@@ -1,8 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import About from '../views/About.vue';
-import Home from '../views/Login.vue';
 import Login from '../views/Login.vue';
-import Confirm from '../views/Confirm.vue';
+import Lobby from '../views/lobby/Lobby.vue';
 
 const routes = [
     {
@@ -11,14 +9,9 @@ const routes = [
         component: Login,
     },
     {
-        path: '/about',
-        name: 'About',
-        component: About,
-    },
-    {
-        path: '/email_confirmed',
-        name: 'Confirm',
-        component: Confirm,
+        path: '/lobby',
+        name: 'Lobby',
+        component: Lobby,
     }
 ]
 

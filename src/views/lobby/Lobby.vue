@@ -1,9 +1,13 @@
 <script>
-import Header from "./components/Header.vue";
+import FloatPanel from "../../components/FloatPanel.vue";
+import MainPane from "./components/MainPane.vue";
 
 export default {
+    name: 'Home',
     data() {
-        return {}
+        return {
+            currentFloat: ["mainFloat"]
+        }
     },
     methods: {
         goBack() {
@@ -14,27 +18,29 @@ export default {
             }
         },
         showFloat(floatName, event) {
+            console.log(this.currentFloat);
             this.$refs[this.currentFloat[0]].hide();
             this.$refs[floatName].show();
             this.currentFloat.unshift(floatName);
-        }, 
+        },
         message(event) {
             this.$refs.okPane.message = event.message;
             this.showFloat("okFloat");
-        }        
+        }
     },
     mounted() {
+        console.log("Lobby Mounted");
+        this.showFloat("mainFloat");
     },
     components: {
-        Header
-    }, 
+        FloatPanel,
+        MainPane
+    }
 }
 </script>
 
 <template>
-    <Header></Header>
-    <router-view></router-view>
+    <FloatPanel ref="mainFloat" title="Famous Trivia" sticky>
+        <MainPane></MainPane>
+    </FloatPanel>
 </template>
-
-<style scoped>
-</style>

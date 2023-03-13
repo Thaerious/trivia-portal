@@ -6,6 +6,7 @@ async function verify(token) {
             "Content-Type": "application/json",
         },
         method: "POST",
+        credentials: 'include',
         body: JSON.stringify({
             token: token
         })

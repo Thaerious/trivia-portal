@@ -1,14 +1,16 @@
 <script>
-import FloatPanel from "../components/FloatPanel.vue";
-import LoginPane from "../components/LoginPane.vue";
-import EmailPane from '../components/EmailPane.vue';
-import RegisterPane from '../components/RegisterPane.vue';
-import OkPane from '../components/OkPane.vue';
-import GooglePane from "../components/GooglePane.vue";
+import FloatPanel from "@/components/FloatPanel.vue";
+import LoginPane from "@/components/LoginPane.vue";
+import EmailPane from '@/components/EmailPane.vue';
+import RegisterPane from '@/components/RegisterPane.vue';
+import OkPane from '@/components/OkPane.vue';
+import GooglePane from "@/components/GooglePane.vue";
+import status from "@/utils/api/status.js";
+import router from "@/router";
 
-export default {
+export default { 
     name: 'Home',
-    data() {
+    data() { 
         return {
             currentFloat: ["loginFloat"]
         }
@@ -25,25 +27,24 @@ export default {
             this.$refs[this.currentFloat[0]].hide();
             this.$refs[floatName].show();
             this.currentFloat.unshift(floatName);
-        },
+        }, 
         message(event) {
             this.$refs.okPane.message = event.message;
             this.showFloat("okFloat");
+        },
+        goLobby() {
+            router.push('Lobby');
         }
     },
-    mounted() {
-        switch (this.$route.query.state) {
-            case "email_confirmed":
-                this.$refs.confirmFloat.show();
-                break;
-            case "email_not_confirmed":
-                this.$refs.notConfirmFloat.show();
-                break;
-            default:
-                this.$refs.loginFloat.show();
-                break;
+    async mounted() {
+        const body = await status.body();
+        console.log(body);
+        if (body.data["logged_in"]) {
+            this.goLobby();
         }
-
+        else {
+            this.$refs.loginFloat.show();
+        }
     },
     components: {
         FloatPanel,
@@ -59,7 +60,9 @@ export default {
 <template>
     <div @message='showFloat("okFloat")'>
         <FloatPanel ref="loginFloat" title="Login" sticky>
-            <LoginPane @google='showFloat("googleFloat")' @email='showFloat("emailFloat")' />
+            <LoginPane 
+                @google='showFloat("googleFloat")' 
+                @email='showFloat("emailFloat")' />
         </FloatPanel>
 
         <FloatPanel ref="googleFloat" title="Login With Google" @back='goBack' back sticky>
@@ -67,7 +70,10 @@ export default {
         </FloatPanel>
 
         <FloatPanel ref="emailFloat" title="Login With Email" @back='goBack' back sticky>
-            <EmailPane @message='message($event)' @register='showFloat("registerFloat")' />
+            <EmailPane 
+                @success='goLobby'
+                @message='message($event)' 
+                @register='showFloat("registerFloat")' />
         </FloatPanel>
 
         <FloatPanel ref="registerFloat" title="Register New Account" @back='goBack' back sticky>
@@ -97,7 +103,7 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-@import '../assets/styles/pane.scss';
+@import '@/assets/styles/pane.scss';
 
 .container {
     display: flex;

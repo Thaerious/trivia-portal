@@ -1,9 +1,8 @@
 <script>
-import FloatPanel from "../components/FloatPanel.vue";
+import FloatPanel from "@/components/FloatPanel.vue";
 
 export default {
     name: "OkFloat",
-    // extends: FloatPanel,
     methods: {
         show() {
             console.log(this.$refs.floatPanel);
@@ -39,5 +38,5 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-@import '../assets/styles/pane.scss';
+@import '@/assets/styles/pane.scss';
 </style>
