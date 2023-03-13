@@ -4,6 +4,7 @@ import LoginPane from "../components/LoginPane.vue";
 import EmailPane from '../components/EmailPane.vue';
 import RegisterPane from '../components/RegisterPane.vue';
 import OkPane from '../components/OkPane.vue';
+import GooglePane from "../components/GooglePane.vue";
 
 export default {
     name: 'Home',
@@ -28,16 +29,7 @@ export default {
         message(event) {
             this.$refs.okPane.message = event.message;
             this.showFloat("okFloat");
-        },
-        googleAuth(response) {
-            console.log(response);
-            console.log(response.credential);
-        },
-        // closeEmailConfirmed() {
-        //     window.history.pushState("home", "Home", "/")
-        //     this.$refs.loginFloat.show();
-        //     this.$refs.confirmFloat.hide();
-        // },       
+        }
     },
     mounted() {
         switch (this.$route.query.state) {
@@ -58,7 +50,8 @@ export default {
         LoginPane,
         EmailPane,
         RegisterPane,
-        OkPane
+        OkPane,
+        GooglePane
     }
 }
 </script>
@@ -70,11 +63,11 @@ export default {
         </FloatPanel>
 
         <FloatPanel ref="googleFloat" title="Login With Google" @back='goBack' back sticky>
-            <GoogleLogin class="centered" :callback="googleAuth" />
+            <GooglePane></GooglePane>
         </FloatPanel>
 
         <FloatPanel ref="emailFloat" title="Login With Email" @back='goBack' back sticky>
-            <EmailPane @register='showFloat("registerFloat")' @login='' />
+            <EmailPane @message='message($event)' @register='showFloat("registerFloat")' />
         </FloatPanel>
 
         <FloatPanel ref="registerFloat" title="Register New Account" @back='goBack' back sticky>
@@ -105,12 +98,6 @@ export default {
 
 <style lang="scss" scoped>
 @import '../assets/styles/pane.scss';
-
-.centered {
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-}
 
 .container {
     display: flex;

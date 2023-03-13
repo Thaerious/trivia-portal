@@ -73,27 +73,5 @@ export default {
 
 <style lang="scss" scoped>
 @import '../assets/styles/pane.scss';
-
-.spinner_container {
-    position: absolute;
-    background-color: rgba(12, 12, 12, 0.5);
-    width: 150px;
-    height: 150px;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1000;
-    border-radius: 75px;
-}
-
-.spinner {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.hidden {
-    display: none;
-}
+@import '../assets/styles/spinner.scss';
 </style>

@@ -14,7 +14,7 @@ function extractData(root) {
 
     for (const child of root.querySelectorAll('[name]')) {
         const field = child.hasAttribute("value-src") ? child.getAttribute("value-src") : "innerText";
-        json[child.getAttribute("name")] = child[field];
+        json[child.getAttribute("name")] = child[field].trim();
     }
     return json;
 }

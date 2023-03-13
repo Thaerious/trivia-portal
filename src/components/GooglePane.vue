@@ -1,5 +1,6 @@
 <script>
 import extractData from '../utils/extractData.js';
+import verify from "../utils/api/verify.js";
 import CONST from '../utils/constants.js';
 import { AtomSpinner } from 'epic-spinners'
 
@@ -10,18 +11,10 @@ export default {
         }
     },
     methods: {
-        doLogin: async function () {
+        async googleAuth(response) {
             try {
                 this.hideSpinner = false;
-                const result = await fetch(CONST.API.LOGIN, {
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    method: "POST",
-                    body: JSON.stringify(extractData(this.$el))
-                });
-                console.log("HERE");
-                const json = await result.json();
+                const json = await verify(response.credential);
                 console.log(json);
                 if (json.message) {
                     this.$emit("message", { message: json.message });
@@ -46,21 +39,18 @@ export default {
     <div class="container">
         <div class="spinner_container" :class="{ hidden: hideSpinner }">
             <atom-spinner class="spinner" :animation-duration="1000" :size="60" color="#ff1d5e" />
-        </div>        
-        <div class="label">Username</div>
-        <div class="textInput" name="username" spellcheck="false" contenteditable></div>
-        <div class="label">Password</div>
-        <div class="textInput password" name="password" spellcheck="false" contenteditable=""></div>
-        <div class="button yellow" @click="doLogin">
-            <span>Login</span>
-        </div>
-        <div class="button blue" @click="$emit('register')">
-            <span>Register</span>
         </div>
     </div>
+    <GoogleLogin class="centered" :callback="googleAuth" />
 </template>
 
 <style lang="scss" scoped>
 @import '../assets/styles/pane.scss';
 @import '../assets/styles/spinner.scss';
+
+.centered {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
 </style>

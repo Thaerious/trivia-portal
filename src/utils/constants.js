@@ -2,6 +2,8 @@ const API_URL = "http://localhost:8080"
 
 export default {
     API: {
-        REGISTER: API_URL + "/credentials/register"
+        REGISTER: API_URL + "/credentials/register",
+        LOGIN: API_URL + "/credentials/login",
+        VERIFY: API_URL + "/verify"
     }
 }
