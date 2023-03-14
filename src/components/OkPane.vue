@@ -9,7 +9,6 @@ export default {
                 return this.$refs.content.innerText;
             },
             set(value) {
-                console.log(`message.set ${value}`);
                 this.$refs.content.innerText = value;
             }
         }
@@ -21,7 +20,7 @@ export default {
 <template>
     <div class="container">
         <div ref="content" id="content" class="content"></div>        
-        <div class="button green" @click="$emit('ok')">
+        <div class="button green" @click="this.$root.goBack">
             <span>Ok</span>
         </div>
     </div>

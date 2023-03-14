@@ -1,6 +1,5 @@
 <script>
 import GoogleLogo from '@/assets/google.png';
-import status from '@/utils/api/status.js';
 
 export default {
     methods: {        
@@ -16,11 +15,11 @@ export default {
 <template>
     <div class="container">
         <div class="button red" @click="$emit('google')">
-            <img class="icon" src="../assets/google.svg" alt="Google Icon">
+            <img class="icon" src="@/assets/google.svg" alt="Google Icon">
             <span class="label">Login With Google</span>
         </div>
         <div class="button yellow" @click="$emit('email')">
-            <img class="icon" src="../assets/email.png" alt="Email Icon">
+            <img class="icon" src="@/assets/email.png" alt="Email Icon">
             <span>Login With Email</span>
         </div>
     </div>

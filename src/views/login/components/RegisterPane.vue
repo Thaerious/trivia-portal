@@ -26,13 +26,14 @@ export default {
                 });
                 const json = await result.json();
                 if (json.message) {
-                    this.$emit("message", { message: json.message });
+                    this.$root.message(json.message);
                 }
                 else if (result.status === 200) {
-                    this.$emit("message", { message: CONFIRMATION_MESSAGE });
+                    this.$root.message(CONFIRMATION_MESSAGE);
                 }
             } catch (exception) {
-                this.$emit("message", { message: exception });
+                this.$root.message(exception);
+
             } finally {
                 this.hideSpinner = true;
             }
@@ -40,7 +41,7 @@ export default {
         checkPassword: function () {
             const data = extractData(this.$el);     
             if (data.password !== data.confirm) {
-                this.$emit("message", { message: "Passwords do not match." });
+                this.$root.message("Passwords do not match.");
                 return false;
             }
             return true;

@@ -12,16 +12,16 @@ export default {
         async googleAuth(response) {
             try {
                 this.hideSpinner = false;
-                const json = await verify(response.credential);
-                console.log(json);
-                if (json.message) {
-                    this.$emit("message", { message: json.message });
+                const result = await verify(response.credential);
+                
+                if (result.json.message) {
+                    this.$root.message(result.json.message);
                 }
                 else if (result.status === 200) {
-                    this.$emit("message", { message: "todo forward to app page" });
+                    this.$emit("success");
                 }
             } catch (exception) {
-                this.$emit("message", { message: exception });
+                this.$root.message(exception);
             } finally {
                 this.hideSpinner = true;
             }
@@ -38,8 +38,10 @@ export default {
         <div class="spinner_container" :class="{ hidden: hideSpinner }">
             <atom-spinner class="spinner" :animation-duration="1000" :size="60" color="#ff1d5e" />
         </div>
-    </div>
-    <GoogleLogin class="centered" :callback="googleAuth" />
+        <div>
+            <GoogleLogin class="centered" :callback="googleAuth" />
+        </div>
+    </div>    
 </template>
 
 <style lang="scss" scoped>

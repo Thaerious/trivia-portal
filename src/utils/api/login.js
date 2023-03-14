@@ -1,7 +1,7 @@
 import CONST from "../constants.js";
 
-async function login(body) {
-    return await fetch(CONST.API.LOGIN, {
+export default async function login(body) {
+    const result = await fetch(CONST.API.LOGIN, {
         headers: {
             "Content-Type": "application/json",
         },
@@ -9,6 +9,7 @@ async function login(body) {
         credentials: 'include',
         body: JSON.stringify(body)
     });
-}
 
-export default login;
+    result.data = await result.json();
+    return result;
+}

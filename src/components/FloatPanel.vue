@@ -46,7 +46,7 @@ export default {
         v-on="{ click: !sticky ? hide : null }">
         <div class="popup-content">
             <div class="popup-header">
-                <div v-if="back" @click='$emit("back")' class='gg-arrow-left'></div>
+                <div v-if="back" @click='this.$root.goBack()' class='gg-arrow-left'></div>
                 <div class="title">{{ title }}</div>
             </div>
             <div class="popup-body">

@@ -14,16 +14,15 @@ export default {
             try {
                 this.hideSpinner = false;
                 const result = await login(extractData(this.$el));
-                const json = result.json();
                 
-                if (json.message) {
-                    this.$emit("message", { message: json.message });
+                if (result.data.message) {
+                    this.$root.message(result.data.message);
                 }
                 else if (result.status === 200) {
                     this.$emit("success");
                 }
             } catch (exception) {
-                this.$emit("message", { message: exception });
+                this.$root.message(exception);
             } finally {
                 this.hideSpinner = true;
             }

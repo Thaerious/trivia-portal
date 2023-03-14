@@ -1,46 +1,44 @@
 <script>
 import FloatPanel from "../../components/FloatPanel.vue";
 import MainPane from "./components/MainPane.vue";
+import ManagePane from "./components/ManagePane.vue";
+import status from "@/utils/api/status.js";
+import router from "@/router";
 
 export default {
     name: 'Home',
-    data() {
-        return {
-            currentFloat: ["mainFloat"]
-        }
-    },
     methods: {
-        goBack() {
-            this.$refs[this.currentFloat[0]].hide();
-            this.currentFloat.shift();
-            if (this.currentFloat.length > 0) {
-                this.$refs[this.currentFloat[0]].show();
-            }
-        },
-        showFloat(floatName, event) {
-            console.log(this.currentFloat);
-            this.$refs[this.currentFloat[0]].hide();
-            this.$refs[floatName].show();
-            this.currentFloat.unshift(floatName);
-        },
-        message(event) {
-            this.$refs.okPane.message = event.message;
-            this.showFloat("okFloat");
+        doLogout() {
+            router.push("/");
         }
     },
-    mounted() {
-        console.log("Lobby Mounted");
-        this.showFloat("mainFloat");
+    async mounted() {
+        const body = await status.body();
+        if (body.data["logged_in"]) {
+            this.$root.showFloat(this.$refs.mainFloat);
+        }
+        else {
+            router.push("/");
+        }
     },
     components: {
         FloatPanel,
-        MainPane
+        MainPane,
+        ManagePane
     }
 }
 </script>
 
 <template>
-    <FloatPanel ref="mainFloat" title="Famous Trivia" sticky>
-        <MainPane></MainPane>
-    </FloatPanel>
+    <div>
+        <FloatPanel ref="mainFloat" title="Famous Trivia" sticky>
+            <MainPane 
+                @navigate="(event)=>this.$root.showFloat(this.$refs[event])"
+                @logout="doLogout" 
+            />
+        </FloatPanel>
+        <FloatPanel ref="manageFloat" title="Famous Trivia" back sticky>
+            <ManagePane />
+        </FloatPanel>
+    </div>
 </template>
