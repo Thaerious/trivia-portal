@@ -15,10 +15,9 @@ export default {
             if (res.code !== 200) {
                 this.$root.message(res.message);
             } else {
-                this.$router.push("Game");
+                this.$router.push(`Game:${res.data}`);
             }
             this.$root.hideSpinner = true;
-            console.log(res);
         }
     },
     async mounted() {

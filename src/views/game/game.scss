@@ -2,7 +2,6 @@
     .board {
         width: 75vh;
         height: 75vh;
-        // font-size: 6vh;
     }
 }
 
@@ -10,7 +9,6 @@
     .board {
         width: 95vw;
         height: 95vw;
-        // font-size: 6vw;
     }
 }
 
@@ -48,5 +46,6 @@
         border-style: solid;
         border-width: 1px 1px 1px 1px;
         background-color: blue;
+        cursor: pointer;
     }
 }

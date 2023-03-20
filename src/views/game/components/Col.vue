@@ -3,19 +3,26 @@ import Cell from "./Cell.vue";
 
 export default {
     name: 'Col',
-    data() {
-        return {}
-    },
     methods: {}, 
     components: {
         Cell
-    }    
+    },
+    computed: {
+        category: {
+            get() {
+                return this.$refs.category;
+            },
+            set(value) {
+                this.$refs.category.text = value;
+            }
+        }
+    },    
 }
 </script>
 
 <template>
     <div class="col">
-        <Cell ref="header"><slot></slot></Cell>
+        <Cell ref="category" @click="$emit('edit_category')"></Cell>
         <Cell>100</Cell>
         <Cell>200</Cell>
         <Cell>300</Cell>

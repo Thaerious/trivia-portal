@@ -24,7 +24,7 @@ export default {
                 this.currentFloat[0].hide();
             }
 
-            float.show();
+            float.show(event);
             this.currentFloat.unshift(float);
         },
         message(message) {

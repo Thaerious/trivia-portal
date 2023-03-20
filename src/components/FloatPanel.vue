@@ -23,12 +23,7 @@ export default {
             if (this.currentFloat.length > 0) {
                 this.$refs[this.currentFloat[0]].show();
             }
-        },
-        showFloat(floatName) {
-            this.$refs[this.currentFloat[0]].hide();
-            this.$refs[floatName].show();
-            this.currentFloat.unshift(floatName);
-        },        
+        }   
     },
     data() {
         return {

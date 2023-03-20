@@ -19,7 +19,17 @@ export default {
             set(value) {
                 this.font.size = value + "px";
             }
-        }
+        },
+        text: {
+            get() {
+                return this.$refs.inner_text.innerText
+            },
+            set(value) {
+                this.$refs.inner_text.innerText = value;
+                const fitText = new FitText(this, this.$refs.inner_text, this.$refs.fit_to);
+                fitText.fit();                
+            }
+        }        
     },
     methods: {},
     components: {},
@@ -41,9 +51,7 @@ export default {
 <template>
     <div class="cell">
         <div ref="fit_to" class="fit-text">
-            <div ref="inner_text" class="text">
-                <slot></slot>
-            </div>
+            <div ref="inner_text" class="text"></div>
         </div>
     </div>
 </template>

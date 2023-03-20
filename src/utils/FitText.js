@@ -11,8 +11,6 @@ class FitText {
         this.proxy = proxy;
         this.element = element;
         this.target = target;
-
-        console.log(this.element.parentElement);
     }
 
     get diff() {
