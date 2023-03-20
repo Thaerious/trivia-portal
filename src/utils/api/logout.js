@@ -9,6 +9,8 @@ export default async function logout() {
         credentials: 'include',
     });
 
-    result.data = await result.json();
-    return result;
+    return {
+        code: result.status,
+        ...await result.json()
+    };    
 };

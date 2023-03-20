@@ -2,11 +2,13 @@
 import Header from "@/components/Header.vue";
 import FloatPanel from "@/components/FloatPanel.vue";
 import OkPane from "@/components/OkPane.vue";
+import { AtomSpinner } from 'epic-spinners'
 
 export default {
     data() {
         return {
-            currentFloat: []
+            currentFloat: [],
+            hideSpinner: true
         }
     },
     methods: {
@@ -35,17 +37,23 @@ export default {
     components: {
         Header,
         FloatPanel,
-        OkPane
+        OkPane,
+        AtomSpinner
     },
 }
 </script>
 
 <template>
     <Header></Header>
+    <div class="spinner_container" :class="{ hidden: hideSpinner }">
+        <atom-spinner class="spinner" :animation-duration="1000" :size="60" color="#ff1d5e" />
+    </div>
     <FloatPanel ref="okFloat" back sticky>
         <OkPane ref="okPane" @ok="this.$root.goBack"></OkPane>
     </FloatPanel>
     <router-view></router-view>
 </template>
 
-<style scoped></style>
+<style lang="scss" scoped>
+@import '@/assets/styles/spinner.scss';
+</style>

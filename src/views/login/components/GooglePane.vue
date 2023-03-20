@@ -14,10 +14,10 @@ export default {
                 this.hideSpinner = false;
                 const result = await verify(response.credential);
                 
-                if (result.json.message) {
+                if (result.data.message) {
                     this.$root.message(result.json.message);
                 }
-                else if (result.status === 200) {
+                else if (result.code === 200) {
                     this.$emit("success");
                 }
             } catch (exception) {

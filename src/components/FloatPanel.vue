@@ -34,8 +34,7 @@ export default {
         return {
             hidden: false,
             visible: false,
-            initial: true,
-            currentFloat: ["loginFloat"]
+            initial: true
         }
     }
 }
@@ -81,7 +80,7 @@ export default {
 
     &.hidden {
         z-index: 999;
-        animation: 1s hide forwards;
+        animation: 1s hide_background forwards;
 
         .popup-content {
             animation: sweepout 1s forwards;
@@ -89,7 +88,7 @@ export default {
     }
 
     &.visible {
-        animation: 1s show forwards;
+        animation: 1s show_background forwards;
 
         .popup-content {
             animation: sweepin 1s forwards;
@@ -131,7 +130,7 @@ export default {
     color: whitesmoke;
 }
 
-@keyframes hide {
+@keyframes hide_background {
     from {
         visibility: visible;
         background-color: var(--color-background-active);
@@ -143,7 +142,7 @@ export default {
     }
 }
 
-@keyframes show {
+@keyframes show_background {
     from {
         visibility: hidden;
         background-color: var(--color-background-inactive);

@@ -18,7 +18,7 @@ export default {
                 if (result.data.message) {
                     this.$root.message(result.data.message);
                 }
-                else if (result.status === 200) {
+                else if (result.code === 200) {
                     this.$emit("success");
                 }
             } catch (exception) {

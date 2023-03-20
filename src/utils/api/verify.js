@@ -12,8 +12,10 @@ async function verify(token) {
         })
     });
     
-    result.data = await result.json();
-    return result;
+    return {
+        code: result.status,
+        ...await result.json()
+    };    
 }
 
 export default verify;

@@ -2,7 +2,6 @@
 import FloatPanel from "@/components/FloatPanel.vue";
 import OkPane from '@/components/OkPane.vue';
 import status from "@/utils/api/status.js";
-import router from "@/router";
 
 import GooglePane from "./components/GooglePane.vue";
 import LoginPane from "./components/LoginPane.vue";
@@ -11,18 +10,10 @@ import RegisterPane from './components/RegisterPane.vue';
 
 export default { 
     name: 'Home',
-    data() { 
-        return {}
-    },
-    methods: {        
-        goLobby() {
-            router.push('Lobby');
-        }
-    },
     async mounted() {
-        const body = await status.body();
-        if (body.data["logged_in"]) {
-            this.goLobby();
+        const r = await await status();
+        if (r.data["logged_in"]) {
+            this.$router.push('Lobby');
         }
         else {
             this.$root.showFloat(this.$refs.loginFloat);
@@ -44,38 +35,24 @@ export default {
         <FloatPanel ref="loginFloat" title="Login" sticky>
             <LoginPane 
                 @google='this.$root.showFloat(this.$refs.googleFloat)' 
-                @email='this.$root.showFloat(this.$refs.emailFloat)' />
+                @email='this.$root.showFloat(this.$refs.emailFloat)' 
+                @navigate='(event) => this.$router.push("second")'
+                />
         </FloatPanel>
 
         <FloatPanel ref="googleFloat" title="Login With Google" back sticky>
             <GooglePane
-                @success='goLobby'/>
+                @success='()=>this.$router.push("Lobby")'/>
         </FloatPanel>
 
         <FloatPanel ref="emailFloat" title="Login With Email" back sticky>
             <EmailPane 
-                @success='goLobby'
+                @success='()=>this.$router.push("Lobby")'
                 @register='this.$root.showFloat(this.$refs.registerFloat)' />
         </FloatPanel>
 
         <FloatPanel ref="registerFloat" title="Register New Account" back sticky>
             <RegisterPane/>
-        </FloatPanel>
-
-        <FloatPanel ref="confirmFloat" title="Email Confirmed" sticky>
-            <div class="container">
-                <div class="button green" @click="closeEmailConfirmed">
-                    <span class="label">Continue</span>
-                </div>
-            </div>
-        </FloatPanel>
-
-        <FloatPanel ref="notConfirmFloat" title="Email Not Confirmed" sticky>
-            <div class="container">
-                <div class="button red" @click="closeEmailConfirmed">
-                    <span class="label">Continue</span>
-                </div>
-            </div>
         </FloatPanel>
     </div>
 </template>

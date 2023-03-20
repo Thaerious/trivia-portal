@@ -1,7 +1,6 @@
 <script>
 import logout from "@/utils/api/logout.js";
 import { AtomSpinner } from 'epic-spinners'
-import router from "@/router";
 
 export default {
         data() {
@@ -15,11 +14,11 @@ export default {
                     this.hideSpinner = false;
                     const result = await logout();
 
-                    if (result.status === 200) {
-                        router.push("/");
+                    if (result.code === 200) {
+                        this.$router.push("/");
                     }
-                    else if (result.data.message) {
-                        this.$root.message(result.data.message);
+                    else if (result.message) {
+                        this.$root.message(result.message);
                     }
                     else {
                         this.$root.message("logout failed");

@@ -10,6 +10,8 @@ export default async function login(body) {
         body: JSON.stringify(body)
     });
 
-    result.data = await result.json();
-    return result;
+    return {
+        code: result.status,
+        ...await result.json()
+    };    
 }
