@@ -1,44 +1,21 @@
 <script>
 import extractData from '@/utils/extractData.js';
-import login from "@/utils/api/login.js";
-import { AtomSpinner } from 'epic-spinners'
+import CONST from "@/utils/constants.js";
 
 export default {
-    data() {
-        return {
-            hideSpinner: true
-        }
-    },
     methods: {
         doLogin: async function () {
-            try {
-                this.hideSpinner = false;
-                const result = await login(extractData(this.$el));
-                
-                if (result.data.message) {
-                    this.$root.message(result.data.message);
-                }
-                else if (result.code === 200) {
-                    this.$emit("success");
-                }
-            } catch (exception) {
-                this.$root.message(exception);
-            } finally {
-                this.hideSpinner = true;
-            }
+            await this.$root.api(CONST.API.CREDENTIALS.LOGIN, extractData(this.$el), (res) => {
+                this.$router.push("Lobby");
+            });
         }
     },
-    components: {
-        AtomSpinner,
-    },
+    components: {},
 }
 </script>
 
 <template>
     <div class="container">
-        <div class="spinner_container" :class="{ hidden: hideSpinner }">
-            <atom-spinner class="spinner" :animation-duration="1000" :size="60" color="#ff1d5e" />
-        </div>        
         <div class="label">Username</div>
         <div class="textInput" name="username" spellcheck="false" contenteditable></div>
         <div class="label">Password</div>

@@ -1,6 +1,6 @@
 <script>
+import CONST from "@/utils/constants.js";
 import FloatPanel from "../../components/FloatPanel.vue";
-import status from "@/utils/api/status.js";
 import GameStore from '@/utils/api/GameStore.js';
 import extractData from '@/utils/extractData.js';
 import MainPane from "./components/MainPane.vue";
@@ -13,26 +13,35 @@ export default {
             this.$root.hideSpinner = false;
             const res = await GameStore.newGame(extractData(this.$el));
             if (res.code !== 200) {
-                this.$root.message(res.message);
+                this.$root.message(res.code + "\n" + res.message);
             } else {
                 this.$router.push(`Game:${res.data}`);
             }
             this.$root.hideSpinner = true;
-        }
+        },
+        async listGames() {
+            this.$root.hideSpinner = false;
+            const res = await GameStore.newGame(extractData(this.$el));
+            if (res.code !== 200) {
+                this.$root.message(res.code + "\n" + res.message);
+            } else {
+                this.$router.push(`Game:${res.data}`);
+            }
+            this.$root.hideSpinner = true;
+        },
+        onLoad(event) {
+            this.$router.push(`Game:${event[0]}`);
+        }      
     },
     async mounted() {
-        try {
-            const r = await status();
-            if (r.data["logged_in"]) {
+        await this.$root.api(CONST.API.CREDENTIALS.STATUS, {}, (res) => {
+            if (res.data["logged_in"]) {
                 this.$root.showFloat(this.$refs.mainFloat);
             }
             else {
                 this.$router.push("/");
             }
-        }
-        catch (exception) {
-            this.$root.message(exception);
-        }
+        });
     },
     components: {
         FloatPanel,
@@ -42,19 +51,21 @@ export default {
 }
 </script>
 
-<template>  
+<template>
     <div>
         <FloatPanel ref="mainFloat" title="Famous Trivia" sticky>
-            <MainPane @navigate="(event) => this.$root.showFloat(this.$refs[event])"
-                @logout="() => this.$router.push('Lobby')" />
+            <MainPane @navigate="(event) => this.$root.showFloat(this.$refs[event])" />
         </FloatPanel>
 
-        <FloatPanel ref="manageFloat" title="Famous Trivia" back sticky>
-            <ManagePane @navigate="(event) => this.$root.showFloat(this.$refs[event])" />
+        <FloatPanel @show="this.$refs.managePane.refresh()" ref="manageFloat" title="Manage Games" back sticky>
+            <ManagePane ref="managePane" 
+                @navigate="(event) => this.$root.showFloat(this.$refs[event])" 
+                @load="onLoad"
+            />
         </FloatPanel>
 
         <FloatPanel ref="nameFloat" title="Enter Game Name" back sticky>
-            <div class="container">                
+            <div class="container">
                 <div class="textInput" name="gamename" spellcheck="false" contenteditable></div>
                 <div class="button green" @click="newGame">
                     <span>Ok</span>

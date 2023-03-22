@@ -1,7 +1,6 @@
 <script>
 import FloatPanel from "@/components/FloatPanel.vue";
 import Col from "./components/Col.vue";
-import status from "@/utils/api/status.js";
 import CatPane from "./components/CatPane.vue";
 import GameStore from '@/utils/api/GameStore.js';
 
@@ -51,14 +50,15 @@ export default {
         }
     },
     async mounted() {
-        const r = await status();
-        if (!r.data["logged_in"]) {
-            this.$router.push("/");
-            return;
-        }
-
-        this.gameid = parseInt(this.id.substring(1));
-        this.showRound();
+        await this.$root.api(CONST.API.CREDENTIALS.STATUS, {}, (res) => {
+            if (r.data["logged_in"]) {
+                this.gameid = parseInt(this.id.substring(1));
+                this.showRound();
+            }
+            else {
+                this.$router.push("/");
+            }
+        });
     },
     props: ['id'],
     components: {

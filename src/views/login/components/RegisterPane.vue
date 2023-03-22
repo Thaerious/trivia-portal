@@ -17,7 +17,7 @@ export default {
                 if (!this.checkPassword()) return;
                 this.hideSpinner = false;
                 
-                const result = await fetch(CONST.API.REGISTER, {
+                const result = await fetch(CONST.API.CREDENTIALS.REGISTER, {
                     headers: {
                         "Content-Type": "application/json",
                     },

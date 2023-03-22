@@ -1,23 +1,5 @@
-import CONST from "../constants.js";
-
-async function api(url, body) {
-    console.log(`Fetch API ` + url);
-    console.log(body);
-
-    const result = await fetch(url, {
-        headers: {
-            "Content-Type": "application/json",
-        },
-        method: "POST",
-        credentials: 'include',
-        body: JSON.stringify(body)
-    });
-
-    return {
-        code: result.status,
-        ...await result.json()
-    };       
-}
+import CONST from "@/utils/constants.js";
+import api from "@/utils/apiFetch.js";
 
 export default class {
     static async newGame({ gamename, username }) {

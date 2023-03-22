@@ -3,6 +3,7 @@ import Header from "@/components/Header.vue";
 import FloatPanel from "@/components/FloatPanel.vue";
 import OkPane from "@/components/OkPane.vue";
 import { AtomSpinner } from 'epic-spinners'
+import api from "@/utils/apiFetch.js";
 
 export default {
     data() {
@@ -27,9 +28,41 @@ export default {
             float.show(event);
             this.currentFloat.unshift(float);
         },
-        message(message) {
+        message(message, title) {
+            if (title) this.$refs.okFloat.setTitle(title);
             this.$refs.okPane.message = message;
             this.showFloat(this.$refs.okFloat);
+        },
+        async api(url, body, onSuccess) {
+            try {
+                if (!this.spinnerTimeout) {
+                    this.spinnerTimeout = setTimeout(() => {
+                        this.hideSpinner = false;
+                        delete this.spinnerTimeout;
+                    }, 250);
+                }
+            
+                const result = await api(url, body);
+
+                if (result.message && result.code !== 200) {
+                    this.message(result.message);
+                }
+                else if (result.code === 200) {
+                    onSuccess(result);
+                }
+                else {
+                    this.message(result?.message, result.code);
+                }
+            } catch (exception) {
+                console.log(exception);
+                this.message(exception, 'Exception');
+            } finally {
+                if (this.spinnerTimeout) {
+                    clearTimeout(this.spinnerTimeout);
+                    delete this.spinnerTimeout;
+                }
+                this.hideSpinner = true;
+            }
         }
     },
     mounted() {
@@ -48,7 +81,7 @@ export default {
     <div class="spinner_container" :class="{ hidden: hideSpinner }">
         <atom-spinner class="spinner" :animation-duration="1000" :size="60" color="#ff1d5e" />
     </div>
-    <FloatPanel ref="okFloat" back sticky>
+    <FloatPanel ref="okFloat" title="alert" back sticky>
         <OkPane ref="okPane" @ok="this.$root.goBack"></OkPane>
     </FloatPanel>
     <router-view></router-view>

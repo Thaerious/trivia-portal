@@ -11,3 +11,5 @@ app.use(vue3GoogleLogin, {
     clientId: import.meta.env.VITE_GOOGLE_OAUTH_CLIENT_ID
 }).mount('#app');
 
+// https://v3-migration.vuejs.org/breaking-changes/events-api.html#_2-x-syntax
+

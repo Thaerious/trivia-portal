@@ -1,16 +1,15 @@
-import CONST from "../constants.js";
-
-export default async function status() {
-    const result = await fetch(CONST.API.STATUS, {
+export default async function api(url, body) {
+    const result = await fetch(url, {
         headers: {
             "Content-Type": "application/json",
         },
         method: "POST",
         credentials: 'include',
+        body: JSON.stringify(body)
     });
-    
+
     return {
         code: result.status,
         ...await result.json()
-    };    
+    };       
 }

@@ -1,8 +1,7 @@
 <script>
+import CONST from "@/utils/constants.js";
 import FloatPanel from "@/components/FloatPanel.vue";
 import OkPane from '@/components/OkPane.vue';
-import status from "@/utils/api/status.js";
-
 import GooglePane from "./components/GooglePane.vue";
 import LoginPane from "./components/LoginPane.vue";
 import EmailPane from './components/EmailPane.vue';
@@ -11,13 +10,14 @@ import RegisterPane from './components/RegisterPane.vue';
 export default { 
     name: 'Home',
     async mounted() {
-        const r = await await status();
-        if (r.data["logged_in"]) {
-            this.$router.push('Lobby');
-        }
-        else {
-            this.$root.showFloat(this.$refs.loginFloat);
-        }
+        await this.$root.api(CONST.API.CREDENTIALS.STATUS, {}, (res) => {
+            if (res.data["logged_in"]) {
+                this.$router.push('Lobby');
+            }
+            else {
+                this.$root.showFloat(this.$refs.loginFloat);
+            }
+        });
     },
     components: {
         FloatPanel,
@@ -41,13 +41,11 @@ export default {
         </FloatPanel>
 
         <FloatPanel ref="googleFloat" title="Login With Google" back sticky>
-            <GooglePane
-                @success='()=>this.$router.push("Lobby")'/>
+            <GooglePane/>
         </FloatPanel>
 
         <FloatPanel ref="emailFloat" title="Login With Email" back sticky>
             <EmailPane 
-                @success='()=>this.$router.push("Lobby")'
                 @register='this.$root.showFloat(this.$refs.registerFloat)' />
         </FloatPanel>
 

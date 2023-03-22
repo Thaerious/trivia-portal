@@ -1,52 +1,22 @@
 <script>
-import logout from "@/utils/api/logout.js";
-import { AtomSpinner } from 'epic-spinners'
+import CONST from "@/utils/constants.js";
 
 export default {
-        data() {
-            return {
-                hideSpinner: true
-            }
-        },
-        methods: {
-            async doLogout() {
-                try {
-                    this.hideSpinner = false;
-                    const result = await logout();
-
-                    if (result.code === 200) {
-                        this.$router.push("/");
-                    }
-                    else if (result.message) {
-                        this.$root.message(result.message);
-                    }
-                    else {
-                        this.$root.message("logout failed");
-                    }
-                } catch (exception) {
-                    this.$root.message(exception);
-                } finally {
-                    this.hideSpinner = true;
-                }
-            },
-            async test() {
-                console.log(this.$parent);
-            }
-        },
-        components: {
-            AtomSpinner,
-        },
-        directives: {
-            focus
+    methods: {
+        async doLogout() {
+            await this.$root.api(CONST.API.CREDENTIALS.LOGOUT, {}, (res) => {
+                this.$router.push("/");
+            });
         }
+    },
+    directives: {
+        focus
     }
+}
 </script>
 
 <template>
     <div class="container">
-        <div class="spinner_container" :class="{ hidden: hideSpinner }">
-            <atom-spinner class="spinner" :animation-duration="1000" :size="60" color="#ff1d5e" />
-        </div>
         <div class="button blue" @click="">
             <span>Account Settings</span>
         </div>

@@ -1,47 +1,23 @@
 <script>
-import verify from "@/utils/api/verify.js";
-import { AtomSpinner } from 'epic-spinners'
+import CONST from "@/utils/constants.js";
 
 export default {
-    data() {
-        return {
-            hideSpinner: true
-        }
-    },
     methods: {
         async googleAuth(response) {
-            try {
-                this.hideSpinner = false;
-                const result = await verify(response.credential);
-                
-                if (result.data.message) {
-                    this.$root.message(result.json.message);
-                }
-                else if (result.code === 200) {
-                    this.$emit("success");
-                }
-            } catch (exception) {
-                this.$root.message(exception);
-            } finally {
-                this.hideSpinner = true;
-            }
+            await this.$root.api(CONST.API.CREDENTIALS.VERIFY, {}, (res) => {
+                this.$router.push("Lobby");
+            });
         }
-    },
-    components: {
-        AtomSpinner,
-    },
+    }
 }
 </script>
 
 <template>
     <div class="container">
-        <div class="spinner_container" :class="{ hidden: hideSpinner }">
-            <atom-spinner class="spinner" :animation-duration="1000" :size="60" color="#ff1d5e" />
-        </div>
         <div>
             <GoogleLogin class="centered" :callback="googleAuth" />
         </div>
-    </div>    
+    </div>
 </template>
 
 <style lang="scss" scoped>

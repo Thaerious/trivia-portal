@@ -1,6 +1,9 @@
 <script>
 export default {
     name: "FloatPanel",
+    data() {
+        return {}
+    },
     props: {
         title: String,
         sticky: Boolean,
@@ -11,11 +14,13 @@ export default {
             this.hidden = true;
             this.visible = false;
             this.initial = false;
+            this.$emit("hide");
         },
         show() {
             this.hidden = false;
             this.visible = true;
             this.initial = false;
+            this.$emit("show");
         },
         goBack() {
             this.$refs[this.currentFloat[0]].hide();
@@ -23,7 +28,10 @@ export default {
             if (this.currentFloat.length > 0) {
                 this.$refs[this.currentFloat[0]].show();
             }
-        }   
+        },
+        setTitle(value) {
+            this.$refs.title.innerText = value;
+        }
     },
     data() {
         return {
@@ -41,7 +49,7 @@ export default {
         <div class="popup-content">
             <div class="popup-header">
                 <div v-if="back" @click='this.$root.goBack()' class='gg-arrow-left'></div>
-                <div class="title">{{ title }}</div>
+                <div ref="title" class="title">{{ title }}</div>
             </div>
             <div class="popup-body">
                 <slot></slot>
@@ -111,7 +119,7 @@ export default {
     border-radius: 10px 10px 0px 0px;
     user-select: none;
 
-    .title{
+    .title {
         text-align: center;
         font-size: var(--font-size-panel-header);
         font-weight: var(--font-weight-panel-header);
