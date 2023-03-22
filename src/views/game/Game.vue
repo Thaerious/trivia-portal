@@ -3,6 +3,7 @@ import FloatPanel from "@/components/FloatPanel.vue";
 import Col from "./components/Col.vue";
 import CatPane from "./components/CatPane.vue";
 import GameStore from '@/utils/api/GameStore.js';
+import CONST from '@/utils/constants.js';
 
 export default {
     name: 'Game',
@@ -14,18 +15,14 @@ export default {
     },
     methods: {
         async showRound() {
-            const res = await GameStore.getRound({
+            await this.$root.api(CONST.API.GAME_STORE.GET_ROUND, {
                 gameid: this.gameid,
                 round: this.currentRound
+            }, (res) => {
+                for (const c in res.data.categories) {
+                    this.$refs[`col${c}`].category.text = res.data.categories[c];
+                }
             });
-
-            if (res.code !== 200 && res.message) {
-                this.$root.message(res.message);
-            }
-
-            for (const c in res.data.categories) {
-                this.$refs[`col${c}`].category.text = res.data.categories[c];
-            }
         },
         editCategory(col) {
             this.currentCol = col;
@@ -51,7 +48,7 @@ export default {
     },
     async mounted() {
         await this.$root.api(CONST.API.CREDENTIALS.STATUS, {}, (res) => {
-            if (r.data["logged_in"]) {
+            if (res.data["logged_in"]) {
                 this.gameid = parseInt(this.id.substring(1));
                 this.showRound();
             }

@@ -11,6 +11,12 @@ export default {
                     this.$refs.listPane.addItem(datum.gamename, datum.gameid);
                 }
             });
+        },
+        async doDelete(event) {
+            const gameid = this.$refs.listPane.getSelected()[0];
+            await this.$root.api(CONST.API.GAME_STORE.DELETE_GAME, {gameid : gameid}, (res) => {
+                this.refresh();
+            });            
         }
     },
     components: { ListPane },
@@ -27,10 +33,10 @@ export default {
             <div class="button green" @click="$emit('navigate', 'nameFloat')">
                 <span>New</span>
             </div>
-            <div class="button orange" @click="$emit('load', this.$refs.listPane.getSelected())">
+            <div class="button orange" @click="$emit('load', this.$refs.listPane.getSelected()[0])">
                 <span>Load</span>
             </div>
-            <div class="button red" @click="">
+            <div class="button red" @click="doDelete">
                 <span>Delete</span>
             </div>
         </div>

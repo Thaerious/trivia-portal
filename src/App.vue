@@ -45,7 +45,8 @@ export default {
                 const result = await api(url, body);
 
                 if (result.message && result.code !== 200) {
-                    this.message(result.message);
+                    this.message(result.code + "\n" + result.message);
+                    console.log(result);
                 }
                 else if (result.code === 200) {
                     onSuccess(result);

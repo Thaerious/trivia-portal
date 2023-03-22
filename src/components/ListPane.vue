@@ -11,7 +11,6 @@ export default {
     },
     methods: {
         addItem(label, data) {
-            console.log("add item " + label);
             this.contents.push({
                 label: label,
                 data: data
