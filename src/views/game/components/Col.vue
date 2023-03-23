@@ -3,20 +3,17 @@ import Cell from "./Cell.vue";
 
 export default {
     name: 'Col',
-    methods: {}, 
+    methods: {
+        getCategory() {
+            return this.$refs.category.getText();
+        },
+        setCategory(value) {
+            this.$refs.category.setText(value);
+        }
+    },
     components: {
         Cell
-    },
-    computed: {
-        category: {
-            get() {
-                return this.$refs.category;
-            },
-            set(value) {
-                this.$refs.category.text = value;
-            }
-        }
-    },    
+    }
 }
 </script>
 
@@ -32,5 +29,5 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-    @import '../game.scss';
+@import '../game.scss';
 </style>

@@ -19,14 +19,17 @@ export default {
                 gameid: this.gameid,
                 round: this.currentRound
             }, (res) => {
-                for (const c in res.data.categories) {
-                    this.$refs[`col${c}`].category.text = res.data.categories[c];
+                for (const i in res.data.categories) {
+                    const text = res.data.categories[i];
+                    this.$refs[`col${i}`].setCategory(text);
                 }
             });
         },
         editCategory(col) {
             this.currentCol = col;
-            this.$refs.catPane.setText(this.$refs[`col${col}`].category.text);
+            const text = this.$refs[`col${col}`].getCategory();
+            console.log(text);
+            this.$refs.catPane.setText(text);
             this.$root.showFloat(this.$refs.catFloat);
         },
         async updateCategory() {
@@ -42,7 +45,7 @@ export default {
             if (res.code !== 200 && res.message) {
                 this.$root.message(res.message);
             } else {
-                this.$refs[`col${this.currentCol}`].category = this.$refs.catPane.getText();
+                this.$refs[`col${this.currentCol}`].setCategory(this.$refs.catPane.getText());
             }
         }
     },

@@ -2,6 +2,7 @@
     .board {
         width: 75vh;
         height: 75vh;
+        --reference-width: 75vh;
     }
 }
 
@@ -9,6 +10,7 @@
     .board {
         width: 95vw;
         height: 95vw;
+        --reference-width: 95vw;
     }
 }
 

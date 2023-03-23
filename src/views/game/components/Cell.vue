@@ -1,5 +1,6 @@
 <script>
-import FitText from "@/utils/FitText";
+import FitTextWidth from "@/utils/FitTextWidth";
+import FitTextHeight from "@/utils/FitTextHeight";
 
 export default {
     name: 'Cell',
@@ -7,44 +8,35 @@ export default {
         return {
             font: {
                 color: 'whitesmoke',
-                size: '50px'
+                size: '1em'
             }
         }
     },
     computed: {
-        size: {
+        fontSize: {
             get() {
-                return parseInt(this.font.size);
+                return parseFloat(this.font.size);
             },
             set(value) {
-                this.font.size = value + "px";
+                this.font.size = value + "em";
             }
-        },
-        text: {
-            get() {
-                return this.$refs.inner_text.innerText
-            },
-            set(value) {
-                this.$refs.inner_text.innerText = value;
-                const fitText = new FitText(this, this.$refs.inner_text, this.$refs.fit_to);
-                fitText.fit();                
-            }
-        }        
+        }    
     },
-    methods: {},
-    components: {},
-    mounted() {
-        const fitText = new FitText(this, this.$refs.inner_text, this.$refs.fit_to);
-        fitText.fit();
+    methods: {
+        async setText(value) {
+            this.$refs.inner_text.innerText = value;
+            const fitWidth = new FitTextWidth(this, this.$refs.inner_text);
+            const fitHeight = new FitTextHeight(this, this.$refs.inner_text);
 
-        window.addEventListener("resize", (event) => {
-            if (this.onResize) clearTimeout(this.onResize);
-            this.onResize = setTimeout(() => {
-                fitText.fit();
-                this.onResize = undefined;
-            }, 500);
-        });
-    }
+            await fitWidth.fit();
+            await fitHeight.fit();
+        },
+        getText() {
+            return this.$refs.inner_text.innerText
+        }
+    },
+    components: {},
+    mounted() {}
 }
 </script>
 
@@ -58,6 +50,10 @@ export default {
 
 <style lang="scss" scoped>
 @import '../game.scss';
+.cell{
+    font-size: calc(var(--reference-width) * 0.05);
+    font-variant: small-caps;
+}
 
 .fit-text {
     position: absolute;
@@ -75,5 +71,6 @@ export default {
     top: 50%;
     color: v-bind('font.color');
     font-size: v-bind('font.size');
+    line-height: 100%;
 }
 </style>
