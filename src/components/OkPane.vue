@@ -18,7 +18,7 @@ export default {
 </script>
 
 <template>
-    <div class="container">
+    <div class="pane">
         <div ref="content" id="content" class="content"></div>        
         <div class="button green" @click="this.$root.goBack">
             <span>Ok</span>

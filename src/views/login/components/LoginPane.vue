@@ -13,7 +13,7 @@ export default {
 </script>
 
 <template>
-    <div class="container">
+    <div class="pane">
         <div class="button red" @click="$emit('google')">
             <img class="icon" src="@/assets/google.svg" alt="Google Icon">
             <span class="label">Login With Google</span>
@@ -26,10 +26,7 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-.container {
-    display: flex;
-    flex-direction: column;
-}
+
 
 .button {
     display: flex;

@@ -27,13 +27,14 @@ export default {
 </script>
 
 <template>
-    <div class="container">
+    <div class="pane">
         <ListPane ref="listPane"></ListPane>
         <div class="button_bar">
             <div class="button green" @click="$emit('navigate', 'nameFloat')">
                 <span>New</span>
             </div>
-            <div class="button orange" @click="$emit('load', this.$refs.listPane.getSelected()[0])">
+            <div class="button orange" 
+                @click="$emit('load', this.$refs.listPane.getSelected()[0])">
                 <span>Load</span>
             </div>
             <div class="button red" @click="doDelete">

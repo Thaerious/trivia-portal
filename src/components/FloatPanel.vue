@@ -21,6 +21,7 @@ export default {
             this.visible = true;
             this.initial = false;
             this.$emit("show");
+            console.log(this.$slots);
         },
         goBack() {
             this.$refs[this.currentFloat[0]].hide();
@@ -106,8 +107,8 @@ export default {
     transform: translate(-50%, -50%);
     border-radius: 10px;
     width: 50%;
-    min-width: 500px;
-    max-width: 750px;
+    min-width: 200px;
+    max-width: 95%;
     background-color: var(--color-panel-background);
     z-index: 1001;
 }

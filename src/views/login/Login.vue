@@ -57,9 +57,4 @@ export default {
 
 <style lang="scss" scoped>
 @import '@/assets/styles/pane.scss';
-
-.container {
-    display: flex;
-    flex-direction: column;
-}
 </style>

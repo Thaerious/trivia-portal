@@ -15,7 +15,7 @@ export default {
 </script>
 
 <template>
-    <div class="container">
+    <div class="pane">
         <div class="button green" @click="newGame">
             <span>Ok</span>
         </div>

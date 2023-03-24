@@ -54,7 +54,7 @@ export default {
 </script>
 
 <template>
-    <div class="container">
+    <div class="pane">
         <div class="spinner_container" :class="{ hidden: hideSpinner }">
             <atom-spinner class="spinner" :animation-duration="1000" :size="60" color="#ff1d5e" />
         </div>

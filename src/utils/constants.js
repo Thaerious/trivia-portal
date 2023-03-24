@@ -15,6 +15,7 @@ export default {
             GET_GAME: API_URL + "/gamestore/getGame",
             LIST_GAMES: API_URL + "/gamestore/listGames",
             GET_QUESTION: API_URL + "/gamestore/getQuestion",
+            ADD_QUESTION: API_URL + "/gamestore/addQuestion",
             DELETE_QUESTION: API_URL + "/gamestore/deleteQuestion",
             SET_CATEGORY: API_URL + "/gamestore/setCategory",
             GET_CATEGORY: API_URL + "/gamestore/getCategory",

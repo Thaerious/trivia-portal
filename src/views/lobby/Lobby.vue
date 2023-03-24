@@ -10,7 +10,6 @@ export default {
     methods: {
         async newGame() {
             await this.$root.api(CONST.API.GAME_STORE.NEW_GAME, extractData(this.$el), (res) => {
-                // this.$router.push(`Game:${res.data}`);
                 this.$root.goBack();
             });
         }
@@ -42,7 +41,7 @@ export default {
         <FloatPanel @show="this.$refs.managePane.refresh()" ref="manageFloat" title="Manage Games" back sticky>
             <ManagePane ref="managePane" 
                 @navigate="(event)=>this.$root.showFloat(this.$refs[event])" 
-                @load="(event)=>this.$router.push(`Game:${event}`)"
+                @load="(event)=>this.$router.push(`/game/${event}/1`)"
             />
         </FloatPanel>
 

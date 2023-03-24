@@ -1,4 +1,50 @@
 @import 'button.scss';
-@import 'label.scss';
-@import 'textinput.scss';
-@import 'container.scss';
+
+@font-face {
+    font-family: "password";
+    src: url("@/assets/fonts/password.woff");
+}
+
+.pane {
+    display: flex;
+    flex-direction: column;
+
+    textarea {
+        border-radius: 10px;
+        resize: none;
+        padding: 5px;
+    }
+}
+
+.label {
+    display: flex;
+    width: 60%;
+    color: black;
+    border-radius: 10px;
+    align-items: center;
+    align-self: center;
+    justify-content: center;
+    height: 2em;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.textInput {
+    display: flex;
+    width: 60%;
+    border: 1px solid white;
+    background-color: whitesmoke;
+    color: black;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    align-items: center;
+    align-self: center;
+    justify-content: left;
+    height: 45px;
+    cursor: pointer;
+
+    &.password {
+        font-family: password;
+    }
+}

@@ -15,7 +15,7 @@ const routes = [
         component: Lobby,
     },
     {
-        path: '/game:id',
+        path: '/game/:id/:round',
         name: 'Game',
         component: Game,
         props: true

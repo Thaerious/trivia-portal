@@ -15,7 +15,7 @@ export default {
 </script>
 
 <template>
-    <div class="container">
+    <div class="pane">
         <div class="label">Username</div>
         <div class="textInput" name="username" spellcheck="false" contenteditable></div>
         <div class="label">Password</div>

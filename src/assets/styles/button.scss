@@ -1,6 +1,7 @@
-.button_bar{
+.button_bar {
     display: flex;
     flex-direction: row;
+    justify-content: center;
 }
 
 .button {
@@ -14,7 +15,21 @@
     align-self: center;
     justify-content: center;
     height: 55px;
+    color: whitesmoke;
+    font-size: 18px;
+    font-weight: 400;
     cursor: pointer;
+    user-select: none;
+
+    &:focus{
+        border: 1px solid black;
+    }
+
+    &.disabled {
+        pointer-events: none;
+        color: rgb(138, 137, 137);
+        border-color: rgb(187, 187, 187);;
+    }
 
     &:hover {
         border: 1px solid black;
@@ -39,10 +54,17 @@
     }
 
     &.green {
-        background-color: rgb(40, 147, 7);
-    }   
-    
+        background-color: rgb(40, 150, 7);
+
+        &.disabled {
+            background-color: rgb(100, 120, 100);
+        }
+    }
+
     &.orange {
         background-color: rgb(255, 145, 28);
-    }        
+        &.disabled {
+            background-color: rgb(120, 115, 100);
+        }        
+    }
 }

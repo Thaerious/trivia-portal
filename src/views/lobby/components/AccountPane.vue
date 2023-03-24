@@ -12,7 +12,7 @@ export default {
 </script>
 
 <template>
-    <div class="container">
+    <div class="pane">
         <div class="button blue" @click="">
             <span>Account Settings</span>
         </div>        

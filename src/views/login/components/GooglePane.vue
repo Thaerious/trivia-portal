@@ -13,7 +13,7 @@ export default {
 </script>
 
 <template>
-    <div class="container">
+    <div class="pane">
         <div>
             <GoogleLogin class="centered" :callback="googleAuth" />
         </div>
