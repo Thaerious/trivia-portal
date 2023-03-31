@@ -21,7 +21,6 @@ export default {
             this.visible = true;
             this.initial = false;
             this.$emit("show");
-            console.log(this.$slots);
         },
         goBack() {
             this.$refs[this.currentFloat[0]].hide();

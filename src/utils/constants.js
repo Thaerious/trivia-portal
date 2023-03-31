@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8080"
+const API_URL = "http://192.168.1.217:8080";
 
 export default {
     API: {
@@ -21,6 +21,10 @@ export default {
             GET_CATEGORY: API_URL + "/gamestore/getCategory",
             ALL_CATEGORIES: API_URL + "/gamestore/allCategories",    
             GET_ROUND : API_URL + "/gamestore/getRound",     
+        },
+        GAME: {
+            START: API_URL + "/game/start",
+            GET: API_URL + "/game/get",
         }
     }
 }

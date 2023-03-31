@@ -33,6 +33,11 @@ export default {
             this.$refs.okPane.message = message;
             this.showFloat(this.$refs.okFloat);
         },
+        /**
+         * Call api endpoint at 'url', returns the result with the 
+         * http response code in the .code field.
+         * By convention the return value is in the .data field.
+         */
         async api(url, body, onSuccess) {
             try {
                 if (!this.spinnerTimeout) {

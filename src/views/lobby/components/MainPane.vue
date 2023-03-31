@@ -26,9 +26,6 @@ export default {
         <div class="button yellow" @click="$emit('navigate', 'manageFloat')">
             <span>Manage Games</span>
         </div>
-        <div class="button orange" @click="$emit('navigate', 'hostFloat')">
-            <span>Host Game</span>
-        </div>
         <div class="button red" @click="doLogout">
             <span>Logout</span>
         </div>

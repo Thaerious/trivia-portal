@@ -17,6 +17,12 @@ export default {
             await this.$root.api(CONST.API.GAME_STORE.DELETE_GAME, {gameid : gameid}, (res) => {
                 this.refresh();
             });            
+        },
+        async host(event) {
+            const gameid = this.$refs.listPane.getSelected()[0];
+            await this.$root.api(CONST.API.GAME.START, { gameid: gameid }, (res) => {
+                this.$router.push(`/host/${res.data.idx}`);
+            });
         }
     },
     components: { ListPane },
@@ -30,12 +36,16 @@ export default {
     <div class="pane">
         <ListPane ref="listPane"></ListPane>
         <div class="button_bar">
+            <div class="button blue" 
+                @click="host">
+                <span>Host</span>
+            </div>            
             <div class="button green" @click="$emit('navigate', 'nameFloat')">
                 <span>New</span>
-            </div>
+            </div>            
             <div class="button orange" 
                 @click="$emit('load', this.$refs.listPane.getSelected()[0])">
-                <span>Load</span>
+                <span>Edit</span>
             </div>
             <div class="button red" @click="doDelete">
                 <span>Delete</span>

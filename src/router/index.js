@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Login from '@/views/login/Login.vue';
 import Lobby from '@/views/lobby/Lobby.vue';
 import Game from '@/views/game/Game.vue';
+import Host from '@/views/host/Host.vue';
 
 const routes = [
     {
@@ -19,7 +20,13 @@ const routes = [
         name: 'Game',
         component: Game,
         props: true
-    }       
+    },
+    {
+        path: '/host/:id',
+        name: 'Host',
+        component: Host,
+        props: true
+    }           
 ]
 
 const router = createRouter({

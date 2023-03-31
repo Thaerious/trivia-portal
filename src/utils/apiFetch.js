@@ -8,8 +8,11 @@ export default async function api(url, body) {
         body: JSON.stringify(body)
     });
 
-    return {
+    const res = {
         code: result.status,
         ...await result.json()
     };       
+
+    console.log(res);
+    return res;    
 }

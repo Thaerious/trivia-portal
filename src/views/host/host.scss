@@ -1,0 +1,58 @@
+@media (min-aspect-ratio: 6/8) {
+    .board {
+        width: 75vh;
+        height: 75vh;
+        --reference-width: 75vh;
+    }
+}
+
+@media (max-aspect-ratio: 6/8) {
+    .board {
+        width: 95vw;
+        height: 95vw;
+        --reference-width: 95vw;
+    }
+}
+
+.board_container{
+    display: flex;
+    flex-direction: column;
+    user-select: none;
+}
+
+.board {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    box-sizing: border-box;
+    font-family: Arial Black, serif;
+    color: whitesmoke;
+    table-layout: fixed;
+    z-index: 0;
+    border: 1px solid black;
+    border-radius: 2px;
+
+    transform: translateX(-50%);
+    left: 50%;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    background-color: blue;
+    height: 100%;
+
+    .cell {
+        flex-grow: 1;
+        text-align: center;
+        border-color: black;
+        border-style: solid;
+        border-width: 1px 1px 1px 1px;
+        background-color: blue;
+        cursor: pointer;
+    }
+}

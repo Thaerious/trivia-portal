@@ -4,6 +4,7 @@ import FloatPanel from "../../components/FloatPanel.vue";
 import extractData from '@/utils/extractData.js';
 import MainPane from "./components/MainPane.vue";
 import ManagePane from "./components/ManagePane.vue";
+import JoinPane from "./components/JoinPane.vue";
 
 export default {
     name: 'Lobby',
@@ -27,7 +28,8 @@ export default {
     components: {
         FloatPanel,
         MainPane,
-        ManagePane
+        ManagePane,
+        JoinPane
     }
 }
 </script>
@@ -44,6 +46,11 @@ export default {
                 @load="(event)=>this.$router.push(`/game/${event}/1`)"
             />
         </FloatPanel>
+
+        <FloatPanel ref="joinFloat" title="Join Game" back sticky>
+            <JoinPane ref="joinPane"/>
+        </FloatPanel>
+
 
         <FloatPanel ref="nameFloat" title="Enter Game Name" back sticky>
             <div class="container">

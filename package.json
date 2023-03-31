@@ -8,6 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "dotenv": "^16.0.3",
     "epic-spinners": "^2.0.0",
     "vue": "^3.2.45",
     "vue-router": "^4.0.13",
